@@ -17,18 +17,109 @@
             android:layout_height="wrap_content"
             android:text="Button" />
 
+        <RadioGroup
+            android:id="@+id/action"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checkedButton="@+id/rList">
+
+            <RadioButton
+                android:id="@+id/rList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="list" />
+
+            <RadioButton
+                android:id="@+id/rInsert"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="insert" />
+
+            <RadioButton
+                android:id="@+id/rDelete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="delete" />
+
+        </RadioGroup>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="name" />
+
+            <EditText
+                android:id="@+id/eName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alive="right"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="textMultiLine" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/text2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lang" />
+
+            <EditText
+                android:id="@+id/eLanguage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alive="right"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="textMultiLine" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/text3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="value" />
+
+            <EditText
+                android:id="@+id/eValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alive="right"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="textMultiLine" />
+
+        </LinearLayout>
+
         <TextView
             android:id="@+id/res"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
+            android:layout_weight="1"
             android:text="TextView" />
-
-        <Button
-            android:id="@+id/jBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Разобрать" />
-
     </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

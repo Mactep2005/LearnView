@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import java.io.BufferedInputStream;
@@ -25,6 +26,7 @@ import java.net.URL;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     Button btn;
     TextView res;
+    RadioGroup rbtn;
 
     HttpURLConnection conn;
 
@@ -34,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         btn = (Button) findViewById(R.id.btn);
         res = (TextView) findViewById(R.id.res);
-
+        rbtn=(RadioGroup) findViewById(R.id.action);
         btn.setOnClickListener(this);
 
     }
@@ -42,11 +44,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        new AsyncRequest().execute();
-        Intent intent = new Intent(this, row.class);
-        // intent.putExtra("author", nick);
-        //   intent.putExtra("client", client);
-        startActivity(intent);
+        switch (rbtn.getCheckedRadioButtonId()) {
+            case 0: {
+                new AsyncRequest().execute();
+                //Intent intent = new Intent(this, row.class);
+                // intent.putExtra("author", nick);
+                //   intent.putExtra("client", client);
+                //startActivity(intent);
+            }
+            case 1: {
+                new AsyncRequest().execute();
+            }
+            case 2: {
+                new AsyncRequest().execute();
+            }
+        }
     }
 
     private class AsyncRequest extends AsyncTask<String, Integer, String> {
