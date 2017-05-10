@@ -11,5 +11,6 @@ public class row extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.row);
+
     }
 }
