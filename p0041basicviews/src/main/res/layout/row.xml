@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+
+ <!--   <TextView
+        android:id="@+id/ColMemberID"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="ID" />
+
+    <TextView
+        android:id="@+id/ColAuthor"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:text="Author" />
+
+    <TextView
+        android:id="@+id/ColClient"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:text="Client" />
+
+    <TextView
+        android:id="@+id/ColText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:text="Text" />-->
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/ColMemberID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#00aa00"
+            android:text="ID" />
+
+
+        <TextView
+            android:id="@+id/ColAuthor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Author" />
+
+        <TextView
+            android:id="@+id/ColClient"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Client" />
+
+        <TextView
+            android:id="@+id/ColData"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Data" />
+
+        <TextView
+            android:id="@+id/ColText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Text" />
+
+
+    </LinearLayout>
+</LinearLayout>

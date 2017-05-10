@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Обучение управления элементами</string>
+    <string name="action_settings">Настройки</string>
+    <string name="myString">Мой стринг вверху</string>
+</resources>
