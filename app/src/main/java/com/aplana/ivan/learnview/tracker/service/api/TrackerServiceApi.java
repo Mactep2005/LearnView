@@ -18,7 +18,7 @@ public class TrackerServiceApi {
 
     private String _baseUrl;
     private OkHttpClient httpClient;
-    public static final MediaType JSON
+    private static final MediaType JSON
             = MediaType.parse("application/json; charset=utf-8");
 
     public TrackerServiceApi(String baseUrl) {
