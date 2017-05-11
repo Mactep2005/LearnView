@@ -27,7 +27,6 @@ public class TestEntity {
         return gson.fromJson(jsonInString, TestEntity.class);
     }
     public String ObjToJson (TestEntity clss){
-
         Gson gson = new Gson();
         return gson.toJson(clss);
     }
