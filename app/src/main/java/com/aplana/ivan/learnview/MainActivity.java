@@ -1,27 +1,18 @@
 package com.aplana.ivan.learnview;
 
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
+import com.aplana.ivan.learnview.tracker.service.api.TrackerServiceApi;
+
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-
-import java.net.URL;
-
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -50,33 +41,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
 
-        switch (rbtn.getCheckedRadioButtonId()) {
-            case 0: {
-             //   new AsyncRequest().execute("list");
+       // switch (rbtn.getCheckedRadioButtonId()) {
+       //     case 0: {
+               new AsyncRequest().execute();
                 //Intent intent = new Intent(this, row.class);
                 // intent.putExtra("author", nick);
                 //   intent.putExtra("client", client);
                 //startActivity(intent);
+
+
                 TestEntity tst=new  TestEntity();
                 tst.name=tName.getText().toString();
                 tst.language=tLang.getText().toString();
                 tst.value=tVal.getText().toString();
-                res.setText(tst.ObjToJson(tst));
-            }
-            case 1: {
+                //res.setText(tst.ObjToJson(tst));
+     //       }
+     //       case 1: {
               //  new AsyncRequest().execute();
-            }
-            case 2: {
+    //        }
+   //         case 2: {
             //    new AsyncRequest().execute();
-            }
-        }
+   //         }
+   //     }
     }
 
     private class AsyncRequest extends AsyncTask<String, Integer, String> {
+        TrackerServiceApi api = new TrackerServiceApi("http://172.16.0.5:9090/");
         @Override
         protected String doInBackground(String... params) {
             try {
-                return new Request().Content;
+                return api.getByIdEntity("744def09-7cca-4f93-b700-206c10236e7a");//new Request().json;
             } catch (IOException e) {
                 e.printStackTrace();
                 return null;
@@ -92,15 +86,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public class Request {
-
-        private final String USER_AGENT = "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36";
-        private final String API_SERVER = "http://172.16.0.5:9090";
+        public String json;
+        public Request() throws IOException {
+            TrackerServiceApi api = new TrackerServiceApi("http://172.16.0.5:9090/");
+            try {
+                json = api.getByIdEntity("744def09-7cca-4f93-b700-206c10236e7a");
+            } catch (IOException e) {
+                throw e;
+            }
+        }
+        //private final String USER_AGENT = "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36";
+        //private final String API_SERVER = "http://172.16.0.5:9090";
      //   private final String API_SERVER = "http://scool88.royal-webhost.tk";
 
-        public String Content;
+        //public String Content;
 
 
-        public Request() throws IOException {
+        /*public Request() throws IOException {
             StringBuilder result = new StringBuilder();
             String urlParameters = API_SERVER + "/api/values"; // url params
      //       String urlParameters = API_SERVER + "/bd/service.php?action=select"; // url params
@@ -131,7 +133,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             } finally {
                 conn.disconnect();
                 Log.i("chat", "+ --------------- ЗАКРОЕМ СОЕДИНЕНИЕ");
-            }
-        }
+            }*/
+       // }
     }
 }

@@ -36,7 +36,7 @@ public class TrackerServiceApi {
         return response.body().string();
     }
 
-    public String getByIdEntity(UUID id) throws IOException {
+    public String getByIdEntity(String id) throws IOException {
         Request request = new Request.Builder()
                 .url(_baseUrl+"api/getbyid/"+id)
                 .build();
