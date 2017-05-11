@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btn;
     TextView res;
     RadioGroup rbtn;
+    EditText tName,tLang,tVal;
 
     HttpURLConnection conn;
 
@@ -37,6 +39,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn = (Button) findViewById(R.id.btn);
         res = (TextView) findViewById(R.id.res);
         rbtn=(RadioGroup) findViewById(R.id.action);
+        tName= (EditText) findViewById(R.id.eName);
+        tLang=(EditText) findViewById(R.id.eLanguage);
+        tVal=(EditText) findViewById(R.id.eValue);
         btn.setOnClickListener(this);
 
     }
@@ -47,18 +52,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         switch (rbtn.getCheckedRadioButtonId()) {
             case 0: {
-                new AsyncRequest().execute("list");
+             //   new AsyncRequest().execute("list");
                 //Intent intent = new Intent(this, row.class);
                 // intent.putExtra("author", nick);
                 //   intent.putExtra("client", client);
                 //startActivity(intent);
-
+                TestEntity tst=new  TestEntity();
+                tst.name=tName.getText().toString();
+                tst.language=tLang.getText().toString();
+                tst.value=tVal.getText().toString();
+                res.setText(tst.ObjToJson(tst));
             }
             case 1: {
-                new AsyncRequest().execute();
+              //  new AsyncRequest().execute();
             }
             case 2: {
-                new AsyncRequest().execute();
+            //    new AsyncRequest().execute();
             }
         }
     }
