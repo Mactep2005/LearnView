@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         switch (rbtn.getCheckedRadioButtonId()) {
             case 0: {
-                new AsyncRequest().execute();
+                new AsyncRequest().execute("list");
                 //Intent intent = new Intent(this, row.class);
                 // intent.putExtra("author", nick);
                 //   intent.putExtra("client", client);
