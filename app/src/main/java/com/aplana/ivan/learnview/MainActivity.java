@@ -1,5 +1,6 @@
 package com.aplana.ivan.learnview;
 
+import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -34,15 +35,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tLang=(EditText) findViewById(R.id.eLanguage);
         tVal=(EditText) findViewById(R.id.eValue);
         btn.setOnClickListener(this);
-
     }
 
 
     @Override
     public void onClick(View v) {
-
-       // switch (rbtn.getCheckedRadioButtonId()) {
-       //     case 0: {
+int a=rbtn.getCheckedRadioButtonId();
+        switch (rbtn.getCheckedRadioButtonId()) {
+            case 1: {
                new AsyncRequest().execute();
                 //Intent intent = new Intent(this, row.class);
                 // intent.putExtra("author", nick);
@@ -55,14 +55,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 tst.language=tLang.getText().toString();
                 tst.value=tVal.getText().toString();
                 //res.setText(tst.ObjToJson(tst));
-     //       }
-     //       case 1: {
-              //  new AsyncRequest().execute();
-    //        }
-   //         case 2: {
+            }
+            case 2131558524: {
+                MyLocation ml = new MyLocation(this);
+                Location location = ml.getLocation();
+                String latLongString = ml.updateWithNewLocation(location);
+
+                res.setText("Your current position is:\n" + latLongString);
+                //  new MyLocation().execute();
+            }
+           case 2: {
             //    new AsyncRequest().execute();
-   //         }
-   //     }
+            }
+       }
     }
 
     private class AsyncRequest extends AsyncTask<String, Integer, String> {
