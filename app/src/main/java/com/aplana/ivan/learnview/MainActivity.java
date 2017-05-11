@@ -45,13 +45,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
 
-       / switch (rbtn.getCheckedRadioButtonId()) {
+        switch (rbtn.getCheckedRadioButtonId()) {
             case 0: {
                 new AsyncRequest().execute();
                 //Intent intent = new Intent(this, row.class);
                 // intent.putExtra("author", nick);
                 //   intent.putExtra("client", client);
                 //startActivity(intent);
+
             }
             case 1: {
                 new AsyncRequest().execute();
