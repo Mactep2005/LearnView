@@ -1,8 +1,11 @@
 package com.aplana.ivan.learnview;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -11,9 +14,13 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.aplana.ivan.learnview.tracker.service.api.TrackerServiceApi;
+import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
+
+import fr.quentinklein.slt.LocationTracker;
+import fr.quentinklein.slt.TrackerSettings;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -21,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView res;
     RadioGroup rbtn;
     EditText tName,tLang,tVal;
+    TestEntity testEntity = new TestEntity();
 
     HttpURLConnection conn;
 
@@ -43,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 int a=rbtn.getCheckedRadioButtonId();
         switch (rbtn.getCheckedRadioButtonId()) {
             case 1: {
-               new AsyncRequest().execute();
+             //  new AsyncRequest().execute();
                 //Intent intent = new Intent(this, row.class);
                 // intent.putExtra("author", nick);
                 //   intent.putExtra("client", client);
@@ -57,12 +65,41 @@ int a=rbtn.getCheckedRadioButtonId();
                 //res.setText(tst.ObjToJson(tst));
             }
             case 2131558524: {
-                MyLocation ml = new MyLocation(this);
+        /*        MyLocation ml = new MyLocation(this);
                 Location location = ml.getLocation();
                 String latLongString = ml.updateWithNewLocation(location);
 
-                res.setText("Your current position is:\n" + latLongString);
-                //  new MyLocation().execute();
+                res.setText("Your current position is:\n" + latLongString);*/
+                if (    ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                        && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    // You need to ask the user to enable the permissions
+                } else {
+                    TrackerSettings settings =
+                            new TrackerSettings()
+                                    .setUseGPS(true)
+                                    .setUseNetwork(true)
+                                    .setUsePassive(true)
+                                    .setTimeBetweenUpdates(10000);
+
+                    LocationTracker tracker = new LocationTracker(this, settings) {
+                        @Override
+                        public void onLocationFound(Location location) {
+                            Gson gson = new Gson();
+                            testEntity.value = Double.toString(location.getLatitude());
+                            testEntity.language = Double.toString(location.getLongitude());
+                            testEntity.name = Long.toString(location.getTime());
+                            res.setText(gson.toJson(testEntity));
+                            new AsyncRequest().execute();
+                        }
+
+                        @Override
+                        public void onTimeout() {
+
+                        }
+                    };
+                    tracker.startListening();
+                }
+
             }
            case 2: {
             //    new AsyncRequest().execute();
@@ -75,7 +112,7 @@ int a=rbtn.getCheckedRadioButtonId();
         @Override
         protected String doInBackground(String... params) {
             try {
-                return api.getByIdEntity("744def09-7cca-4f93-b700-206c10236e7a");//new Request().json;
+                return new Request().json;
             } catch (IOException e) {
                 e.printStackTrace();
                 return null;
@@ -93,9 +130,10 @@ int a=rbtn.getCheckedRadioButtonId();
     public class Request {
         public String json;
         public Request() throws IOException {
+            Gson gson = new Gson();
             TrackerServiceApi api = new TrackerServiceApi("http://172.16.0.5:9090/");
             try {
-                json = api.getByIdEntity("744def09-7cca-4f93-b700-206c10236e7a");
+                json = api.createEntity(gson.toJson(testEntity));
             } catch (IOException e) {
                 throw e;
             }
