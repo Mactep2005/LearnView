@@ -18,6 +18,8 @@ import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import fr.quentinklein.slt.LocationTracker;
 import fr.quentinklein.slt.TrackerSettings;
@@ -78,18 +80,21 @@ int a=rbtn.getCheckedRadioButtonId();
                             new TrackerSettings()
                                     .setUseGPS(true)
                                     .setUseNetwork(true)
-                                    .setUsePassive(true)
+                                    .setUsePassive(false)
                                     .setTimeBetweenUpdates(10000);
 
                     LocationTracker tracker = new LocationTracker(this, settings) {
                         @Override
                         public void onLocationFound(Location location) {
                             Gson gson = new Gson();
+                            Date d = new Date(location.getTime() );
+                            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy hh:mm");
                             testEntity.value = Double.toString(location.getLatitude());
                             testEntity.language = Double.toString(location.getLongitude());
-                            testEntity.name = Long.toString(location.getTime());
+                            testEntity.name = sdf.format(d);
                             res.setText(gson.toJson(testEntity));
                             new AsyncRequest().execute();
+                            stopListening();
                         }
 
                         @Override
@@ -98,6 +103,7 @@ int a=rbtn.getCheckedRadioButtonId();
                         }
                     };
                     tracker.startListening();
+                    res.setText("Поиск местоположения ...");
                 }
 
             }
@@ -108,7 +114,7 @@ int a=rbtn.getCheckedRadioButtonId();
     }
 
     private class AsyncRequest extends AsyncTask<String, Integer, String> {
-        TrackerServiceApi api = new TrackerServiceApi("http://172.16.0.5:9090/");
+ //       TrackerServiceApi api = new TrackerServiceApi("http://172.16.0.5:9090/");
         @Override
         protected String doInBackground(String... params) {
             try {
@@ -138,45 +144,6 @@ int a=rbtn.getCheckedRadioButtonId();
                 throw e;
             }
         }
-        //private final String USER_AGENT = "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36";
-        //private final String API_SERVER = "http://172.16.0.5:9090";
-     //   private final String API_SERVER = "http://scool88.royal-webhost.tk";
 
-        //public String Content;
-
-
-        /*public Request() throws IOException {
-            StringBuilder result = new StringBuilder();
-            String urlParameters = API_SERVER + "/api/values"; // url params
-     //       String urlParameters = API_SERVER + "/bd/service.php?action=select"; // url params
-            URL url = new URL(urlParameters);
-            conn = (HttpURLConnection) url.openConnection();
-            try {
-                InputStream in = new BufferedInputStream(conn.getInputStream());
-                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    result.append(line);
-                }
-            } finally {
-                conn.disconnect();
-            }
-            try {
-                // сформируем ответ сервера в string
-                // обрежем в полученном ответе все, что находится за "]"
-                // это необходимо, т.к. json ответ приходит с мусором
-                // и если этот мусор не убрать - будет невалидным
-                Content = result.toString();
-                Content = Content.substring(0, Content.indexOf("]") + 1);
-                Log.i("chat", "+  - полный ответ сервера:\n" + Content);
-
-            } catch (Exception e) {
-                Log.i("chat", "+ ошибка чтения из потока: " + e.getMessage());
-            } finally {
-                conn.disconnect();
-                Log.i("chat", "+ --------------- ЗАКРОЕМ СОЕДИНЕНИЕ");
-            }*/
-       // }
     }
 }
